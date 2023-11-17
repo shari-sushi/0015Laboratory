@@ -4,5 +4,5 @@ import "fmt"
 
 func main() {
 	fmt.Print("maka")
-	fmt.Print("maka")
+	// 減らした
 }

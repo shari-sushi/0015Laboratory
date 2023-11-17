@@ -6,4 +6,5 @@ type User struct {
 	Kana            *string `gorm:"type:varchar(50);unique"`
 	IntroMovieUrl   *string `gorm:"type:varchar(100)"`
 	VtuberInputerId *int    `gorm:"type:int(11);not null"`
+	style           int
 }

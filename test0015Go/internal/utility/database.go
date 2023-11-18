@@ -3,5 +3,5 @@ package utility
 import "fmt"
 
 func main() {
-	fmt.Print("maka") //増やした
+	fmt.Print("maka")
 }

@@ -20,10 +20,10 @@
    
 3. go導入
     cd 
-        //メインのディレクトリ(ルートディレクトリ)
+        //メインのディレクトリ(goのルートディレクトリ)
     go install github.com/99designs/gqlgen@latest
         //go の最新バージョンをインストール
-    go mod init  "github.com/sharin-sushi/0018GoogleSearch.git"
+    go mod init  "github.com/sharin-sushi/0015docker"
 　　    githubのproductのページ
         //go.modを構築　※やり直す場合はgo.modを消してから
     // go get -u github.com/gocolly/colly/v2

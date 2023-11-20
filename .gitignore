@@ -5,5 +5,6 @@ test0015Go/.env
 # HOGE_ENV2=hogehoge
 
 test0015Next/.env
+test0015Next/my-app/.env
 # NODE_ENV=production
 

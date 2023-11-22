@@ -6,5 +6,5 @@ test0015Go/.env
 
 test0015Next/.env
 test0015Next/my-app/.env
+test0015Next\my-app\.env
 # NODE_ENV=production
-

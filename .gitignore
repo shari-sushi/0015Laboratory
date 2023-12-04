@@ -10,3 +10,5 @@ test0015Next\my-app\.env
 # NODE_ENV=production
 
 !exsample.env
+
+.env

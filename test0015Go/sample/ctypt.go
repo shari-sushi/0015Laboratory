@@ -13,7 +13,7 @@ import (
 )
 
 func AlterMainCrypt() {
-	text := "shari@gmail.com"
+	text := "shari0123456789abcdefghijklnmopqrstuvwxyz.0123456789abcdefghijklnmopqrstuvwxyz@gmail.com" //暗号化したい文字列
 
 	plain := []byte(text)
 	keyString := "645E739A7F9F162725C1533DC2C5E827" //ここがあれかー
@@ -21,12 +21,19 @@ func AlterMainCrypt() {
 	iv, encrypted, _ := Encrypt(plain, key)
 	decrypted, _ := Decrypt(encrypted, key, iv)
 
+	fmt.Println("Input    :", text)
 	fmt.Println("Key:", keyString)
 	fmt.Println("IV:", hex.EncodeToString(iv))
 	fmt.Println("Encrypted:", base64.StdEncoding.EncodeToString(encrypted))
 	fmt.Printf("Decrypted: %s\n", decrypted)
-	fmt.Println("Input:", text)
 }
+
+//// 実行結果
+// Input    : shari0123456789abcdefghijklnmopqrstuvwxyz.0123456789abcdefghijklnmopqrstuvwxyz@gmail.com
+// Key: 645E739A7F9F162725C1533DC2C5E827
+// IV: 4c3986ec6a398e9ca9d0e7dc13eef858
+// Encrypted: EeA6uaxBmEM1aAOfiphTCIthb3BD2HmITMB1gyCyNxR+Cb5HKpqDWQL29KNl2dQVVtAjm7WSGpOlCn0EwdbSK6YAvcq7fu6YEjHDx+WbvFQzXAHaaaZyNrHoPbC2qUJI
+// Decrypted: shari0123456789abcdefghijklnmopqrstuvwxyz.0123456789abcdefghijklnmopqrstuvwxyz@gmail.com
 
 //email
 func GenerateIV() ([]byte, error) {

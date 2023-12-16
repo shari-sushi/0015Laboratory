@@ -1,10 +1,6 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/sharin-sushi/0015docker/sample"
-)
+import "github.com/sharin-sushi/0015docker/sample"
 
 func main() {
 	// 暗号化関係のhtmlしたやつ
@@ -17,7 +13,7 @@ func main() {
 
 	// crypt.go AES化
 
-	sample.AlterMainCrypt2() //元記事ほぼそのままのもの
-	fmt.Print("-------------------------------\n 以下自分用")
+	// sample.AlterMainCrypt2() //元記事ほぼそのままのもの
+	// fmt.Print("-------------------------------\n 以下自分用")
 	sample.AlterMainCrypt() //自分用に改変したもの
 }

@@ -35,7 +35,7 @@ var likeCnts = []LikeCount{
 }
 
 // 結果 panic
-func test1(c *gin.Context) {
+func Test1(c *gin.Context) {
 	var movieWithLikeCnts []MovieWithLikeCnt
 
 	for i, movie := range movies {
@@ -67,7 +67,7 @@ type MovieWithLikeCnt struct {
 	LikeCnt int
 }
 
-func test2(c *gin.Context) {
+func Test2(c *gin.Context) {
 	var transmitData []MovieWithLikeCnt
 
 	// {1, "imo", ":8080"}, {2, "me", ":3000"}, {3, "chumu", ":80"},
@@ -99,7 +99,7 @@ type MovieWithLikeCnt2 struct {
 	LikeCnt    int
 }
 
-func test3(c *gin.Context) {
+func Test3(c *gin.Context) {
 	var transmitData []MovieWithLikeCnt2
 
 	for _, movie := range movies {
@@ -130,8 +130,8 @@ func returnLikeCntEachMovieId(movieId int, likeCnts []LikeCount) LikeCount {
 	return LikeCount{MovieId: movieId, Count: 0}
 }
 
-// test2の処理目視用
-func test2a(c *gin.Context) {
+// Test2の処理目視用
+func Test2a(c *gin.Context) {
 	// transmitData を作成
 	var transmitData []MovieWithLikeCnt
 

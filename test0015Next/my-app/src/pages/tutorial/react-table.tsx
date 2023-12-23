@@ -104,67 +104,52 @@ function App() {
     //       削除
     //     </button>
     //   ),
-    columnHelper.display({
-      id: 'favorite',
-      header: () => 'ふぁぼ',
-      cell: (props) => (
-        <button onClick={() => handlerFav(props.row.id){
+  ]
 
-        }} >
-      削除
-        </button >
-      ),
-}),
-  ];
+  const table = useReactTable({
+    data: posts,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
 
-const handlerFav = (id: string) => {
-  console.log(id)
-}
-
-const table = useReactTable({
-  data: posts,
-  columns,
-  getCoreRowModel: getCoreRowModel(),
-});
-
-return (
-  // <div style={{ margin: '2em' }}>
-  <div>
-    <h1>Posts List</h1>
-    <table>
-      <thead>
-        {/*  getHeaderGroup メソッドはテーブルのヘッダー情報、getRowModel メソッドはテーブルの Row 情報(行)を戻す。 */}
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {/* headers プロパティには header オブジェクトが配列で含まれる */}
-            {headerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {flexRender(
-                  header.column.columnDef.header,
-                  header.getContext()
-                )}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {/* スライス指定で行指定できる */}
-        {table.getRowModel().rows.slice(0, 5).map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    {/* getRowModelメソッドで取得したデータは行数情報も持っている */}
-    <p>Rows Number: {table.getRowModel().rows.length}</p>
-  </div>
-);
+  return (
+    // <div style={{ margin: '2em' }}>
+    <div>
+      <h1>Posts List</h1>
+      <table>
+        <thead>
+          {/*  getHeaderGroup メソッドはテーブルのヘッダー情報、getRowModel メソッドはテーブルの Row 情報(行)を戻す。 */}
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {/* headers プロパティには header オブジェクトが配列で含まれる */}
+              {headerGroup.headers.map((header) => (
+                <th key={header.id}>
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {/* スライス指定で行指定できる */}
+          {table.getRowModel().rows.slice(0, 5).map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* getRowModelメソッドで取得したデータは行数情報も持っている */}
+      <p>Rows Number: {table.getRowModel().rows.length}</p>
+    </div>
+  );
 }
 
 export default App;

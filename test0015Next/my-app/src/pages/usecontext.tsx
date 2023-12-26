@@ -7,6 +7,7 @@ import { TestuseContect } from "@/component/useContextCom.tsx"
 
 const value = {
     name: "imomochi",
+
     // ただの定数なので、当然無理　
     // const [state, setstate] = useState("a")
 }

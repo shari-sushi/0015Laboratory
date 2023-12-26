@@ -11,7 +11,12 @@ export const ReactPlayerYoutube: React.FC<ReactPlayerYoutubeProps> = ({ url, sta
     <ReactPlayer
       url={url}
       controls={true}
-      config={{ playerVars: { start: { start } } }}
+      config={{
+        playerVars: {
+          autoplay: 1,
+          start: { start }
+        },
+      }}
     />
   );
 };

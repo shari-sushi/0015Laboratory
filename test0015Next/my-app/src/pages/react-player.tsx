@@ -8,11 +8,14 @@ export default function Home() {
     const [start, setStart] = useState(1);
     const url = videoId
 
+    const settinghandler = () => {
+        console.log(1)
+        setVideoId("https://www.youtube.com/watch?v=wBjhxyFU3EY")
+        console.log(2)
+        setStart(30)
+        console.log(3)
+    }
 
-    // useEffect(() => {
-
-    //     const
-    // }, [])
     return (
         <>
             <Link href="/">Home</Link>
@@ -21,13 +24,14 @@ export default function Home() {
                 <ReactPlayerYoutube url={url} start={start} />
                 <button onClick={() => setVideoId("https://www.youtube.com/watch?v=zwSRD65SFQI")}>zwSRD65SFQIにセット</button>
                 <button onClick={() => setVideoId("https://www.youtube.com/watch?v=48xDoCnkayc")}>48xDoCnkaycにセット</button>
-
                 <br />
-
                 <button onClick={() => setStart(1)}>1秒にセット</button>
                 <button onClick={() => setStart(60)}>1分にセット</button>
                 <button onClick={() => setStart(300)}>5分にセット</button>
                 <br />
+                <br />
+                <button onClick={() => settinghandler()}>wBjhxyFU3EYの30sにセット</button>
+
                 onClickでuseStateを起動。
                 一瞬だけその時間になるが、<br />
                 すぐに別の時間に上書きされる。<br /><br />

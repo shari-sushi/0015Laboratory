@@ -1,6 +1,5 @@
 import YouTube from 'react-youtube';
 import React from 'react'
-import ReactPlayer from 'react-player'
 
 type Options = React.ComponentProps<typeof YouTube>['opts'];
 
@@ -8,8 +7,8 @@ type YoutubePlayerProps = {
   videoId: string;
   start?: number;
   opts?: Options;
-  // onReady?: (event: { target: YT.Player }) => void;
-  onReady?: (event: { target: any }) => void;
+  onReady?: (event: { target: YT.Player }) => void;
+  // onReady?: (event: { target: any }) => void;
 };
 
 // const onPlayerReady = (event: { target: YT.Player }) => {
@@ -20,13 +19,11 @@ const onPlayerReady = (event: { target: any }) => {
 
 // 単一動画を再生
 export const YoutubePlayer: React.FC<YoutubePlayerProps> = ({ videoId, start, opts = {
-  // width: 1920,  height: 1080,
-  // width: 450, height: 253,
   width: 400, height: 225,
-  // width: 640,  height: 360,
   playerVars: {
     autoplay: 1,
     start: start,
+    // startSeconds: start, //これでも現象変わらず
     playsinline: 1,
     // mute: 1,             
     loop: 1,

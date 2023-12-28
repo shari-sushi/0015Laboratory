@@ -1,34 +1,42 @@
 import React, { useContext, useEffect, useState, createContext } from "react"
 import Link from "next/link"
 
+
+// 仮説
+// ~Mountとかで先に渡した値をonReadyに渡し直してるから動かない
+
 export default function Home() {
-    const [videoId, setVideoId] = useState("wBjhxyFU3EY")
+    const [videoId, setVideoId] = useState("2T4kKYAJrAM")
     const [start, setStart] = useState(0);
 
-    console.log(start)
-    const settinghandler = () => {
-        setVideoId("wBjhxyFU3EY")
-        setStart(30)
+    const settinghandler = (videoId: string, time: number) => {
+        setVideoId(videoId)
+        setStart(time)
     }
 
     return (
         <>
             <Link href="/">Home</Link>
-            <h1>react-youtube </h1>
+            <h1>react-youtube4 </h1>
             <h2>use seekTo, commponentDidUpdate</h2>
 
             <YouTubePlayer time={start} videoId={videoId} />
-            <button onClick={() => setVideoId("zwSRD65SFQI")}>zwSRD65SFQIにセット</button>
+
+            {/* 0秒にはならない */}
+            <button onClick={() => { setVideoId("zwSRD65SFQI"); setStart(0); }}>zwSRD65SFQIの0秒にセット</button>
+
             <button onClick={() => setVideoId("48xDoCnkayc")}>48xDoCnkaycにセット</button>
-
+            <button onClick={() => setVideoId("2T4kKYAJrAM")}>2T4kKYAJrAMにセット</button>
             <br />
-
-            <button onClick={() => setStart(0)}>0秒にセット</button>
-            <button onClick={() => setStart(60)}>1分にセット</button>
-            <button onClick={() => setStart(300)}>5分にセット</button>
-            <br />
+            時間をセット：
+            <button onClick={() => setStart(0)}>0秒</button>
+            <button onClick={() => setStart(60)}>1分</button>
+            <button onClick={() => setStart(1200)}>20分</button>
+            <br /><br />
             ボタンじゃなくてリンクが良い <br />
-            <Link href="#" onClick={() => settinghandler()}>wBjhxyFU3EYの30秒にセット</Link>
+            <Link href="#" onClick={() => settinghandler("wBjhxyFU3EY", 30)}>wBjhxyFU3EYの30秒にセット</Link><br />
+            requestAnimationFrameはエラーの原因になるっぽい。まあ、描画じゃなくてonReadyでやれって話よな… <br />
+            {/* <button onClick={() => handlerDelayFrame("wBjhxyFU3EY", 30)}>描画完了まで遅延させてみる</button> */}
             <br />
             <br />
             memo
@@ -39,10 +47,12 @@ export default function Home() {
             <br />
             <li>動画遷移時に自動再生させる必要がある。</li>
             <br />
-
         </>
     )
 }
+
+// commit用メモ
+// 自動再生付与
 
 import YouTube from 'react-youtube';
 
@@ -57,73 +67,65 @@ interface YouTubePlayerState {
 
 class YouTubePlayer extends React.Component<YouTubePlayerProps, YouTubePlayerState> {
     private playerRef: React.RefObject<YouTube>;
-    // time = this.props.time
     constructor(props: YouTubePlayerProps) {
-        console.log("props.time", props.time)
-        console.log("props.videoId", props.videoId)
+        console.log("props(super前)", props) // 0
         super(props);
 
         this.state = {
             player: null,
         };
 
+        //これが無いと動画が切り替わらなくなる。時間はセットできるなぜ。
         this.playerRef = React.createRef();
     }
 
+    // renderメソッドよりも後で呼び出される
     componentDidMount() {
         if (this.state.player && this.props.time) {
+            this.state.player.playVideo();
+            // ここでonSeekが機能しないの意味わからん
             this.state.player.seekTo(this.props.time);
-            this.state.player.getPlayerState(1)
+
         }
-        // else if
-        // (this.state.player) {
-        //     console.log("aaa", this.state.player)
-        //     this.state.player.seekTo(0);
-        //     console.log(this.state.player)
-        // }
-    }
-    componentDidUpdate(prevProps: YouTubePlayerProps) {
-        if (prevProps.time !== this.props.time) {
-            this.changeTime(this.props.time);
-            // this.state.player.getPlayerState(1)
-        }
-        // else if (this.state.player) {
-        //     console.log("this.props.time aaa", this.props.time)
-        //     this.changeTime(this.props.time);
-        //     // this.state.player.seekTo(0);
-        // }
     }
 
+    componentDidUpdate(prevProps: YouTubePlayerProps) {
+
+        if (prevProps.time !== this.props.time) {
+            this.changeTime(this.props.time); //必須
+            console.log("check")
+        }
+    }
+
+    // この状態で、onRaedyそのものをコメントアウトすると時間セットできなくなる謎
     onReady = (event: { target: any }) => {
         this.setState({
             player: event.target,
         });
-        event.target.playVideo();
         event.target.seekTo(this.props.time);
-    };
-
-    // const onReady = (event: { target: any }) => {
-    //     setPlayer(event.target);
-    //     event.target.seekTo(time);
-    //     event.target.playVideo();
-    // };
-
+    }
 
     changeTime = (time: number) => {
         console.log('seeking to: ' + time);
         if (this.state.player) {
             this.state.player.playVideo();
-            this.state.player.getPlayerState(1)
             this.state.player.seekTo(time);
         }
     };
 
     render() {
         const { videoId } = this.props;
+        // const start = this.props.time;
+        console.log("this.props", this.props)
         const opts: any = {
             width: '560',
             height: '315',
-            // playing: 1,
+            playerVars: {
+                // https://developers.google.com/youtube/player_parameters
+                autoplay: 1, //自動再生に必須だが、これだけだとダメな時もある様子…。
+                // start: start, //これがあると時間が上書きされる
+                controls: 1,
+            },
         };
 
         return (
@@ -153,3 +155,26 @@ class YouTubePlayer extends React.Component<YouTubePlayerProps, YouTubePlayerSta
 // 動画を指定された時間シークします。
 // この関数を呼び出したときにプレーヤーが一時停止している場合は一時停止のままになり、
 // その他の状態（playing、video cued など）から呼び出した場合は、動画が再生されます。
+
+
+
+// ダメ
+// componentDidUpdate(prevProps: YouTubePlayerProps) {
+//     if (prevProps.videoId !== this.props.videoId) {
+//         this.state.player.playVideo();
+//         this.state.player.seekTo(this.props.time);
+//     }
+//     if (prevProps.time !== this.props.time) {
+//         this.changeTime(this.props.time);
+//     }
+// }
+
+// ダメ
+// componentDidUpdate(prevProps: YouTubePlayerProps) {
+//     if (prevProps.videoId !== this.props.videoId) {
+//         this.state.player.loadVideoById({ videoId: this.props.videoId, startSeconds: this.props.time });
+//     }
+//     if (prevProps.time !== this.props.time && prevProps.videoId === this.props.videoId) {
+//         this.changeTime(this.props.time);
+//     }
+// }

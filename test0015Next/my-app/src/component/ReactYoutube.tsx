@@ -8,13 +8,12 @@ type YoutubePlayerProps = {
   start?: number;
   opts?: Options;
   onReady?: (event: { target: YT.Player }) => void;
-  // onReady?: (event: { target: any }) => void;
 };
 
-// const onPlayerReady = (event: { target: YT.Player }) => {
-const onPlayerReady = (event: { target: any }) => {
+const onPlayerReady = (event: { target: YT.Player }) => {
   // access to player in all event handlers via event.target
-  event.target.pauseVideo();
+  // event.target.pauseVideo();
+  event.target.playVideo();
 }
 
 // 単一動画を再生
@@ -69,7 +68,7 @@ const onPlayerReady2 = (event: { target: any }) => {
 export const YoutubePlayer2: React.FC<YoutubePlayerProps2> = ({ videoId, opts = {
   // width: 1920,  height: 1080,
   // width: 450, height: 253,
-  width: 400, height: 225,
+  width: 400, height: 25,
   // width: 640,  height: 360,
   playerVars: {
     autoplay: 1,

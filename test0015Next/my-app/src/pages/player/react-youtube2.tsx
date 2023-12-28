@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, createContext } from "react"
 import Link from "next/link"
-import { YoutubePlayer2 } from "@/component/react-youtube"
+import { YoutubePlayer2 } from "@/component/ReactYoutube"
 
 export default function Home() {
     const [videoId, setVideoId] = useState("")

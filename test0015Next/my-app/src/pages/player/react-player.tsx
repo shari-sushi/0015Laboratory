@@ -1,33 +1,38 @@
 import React, { useContext, useEffect, useState, createContext } from "react"
 import Link from "next/link"
-import { ReactPlayerYoutube2 } from "@/component/ReactPlayer"
+import { ReactPlayerYoutube } from "@/component/ReactPlayer"
 
 export default function Home() {
     const primaryVideoId = "https://youtu.be/AlHRqSsF--8"
     const [videoId, setVideoId] = useState(primaryVideoId)
     const [start, setStart] = useState(1);
-    const url = videoId + "&t=" + start
+    const url = videoId
 
+    const settinghandler = () => {
+        console.log(1)
+        setVideoId("https://www.youtube.com/watch?v=wBjhxyFU3EY")
+        console.log(2)
+        setStart(30)
+        console.log(3)
+    }
 
-    // useEffect(() => {
-
-    //     const
-    // }, [])
     return (
         <>
             <Link href="/">Home</Link>
-            <h1>react-youtube2</h1>
+            <h1>react-player/youtube</h1>
+
             <div>
-                <ReactPlayerYoutube2 url={url} />
+                <ReactPlayerYoutube url={url} start={start} />
                 <button onClick={() => setVideoId("https://www.youtube.com/watch?v=zwSRD65SFQI")}>zwSRD65SFQIにセット</button>
                 <button onClick={() => setVideoId("https://www.youtube.com/watch?v=48xDoCnkayc")}>48xDoCnkaycにセット</button>
-
                 <br />
-
                 <button onClick={() => setStart(1)}>1秒にセット</button>
                 <button onClick={() => setStart(60)}>1分にセット</button>
                 <button onClick={() => setStart(300)}>5分にセット</button>
                 <br />
+                <br />
+                <button onClick={() => settinghandler()}>wBjhxyFU3EYの30sにセット</button>
+
                 onClickでuseStateを起動。
                 一瞬だけその時間になるが、<br />
                 すぐに別の時間に上書きされる。<br /><br />
@@ -38,8 +43,9 @@ export default function Home() {
                 (1分にセットしており、何度リロードしても1分に戻る)<br />
                 と思いきや、タイムバーを１度いじったら、<br />
                 何度リロードしても上書きされるようになった。<br />
-                <ReactPlayerYoutube2 url={"https://www.youtube.com/watch?v=48xDoCnkayc&t=1s"} />
+                <ReactPlayerYoutube url={"https://www.youtube.com/watch?v=wBjhxyFU3EY"} start={60} />
 
+                {/* <script src="https://www.youtube.com/iframe_api"></script> */}
             </div>
             <div>
             </div>

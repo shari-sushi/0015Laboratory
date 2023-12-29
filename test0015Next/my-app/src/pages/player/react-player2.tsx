@@ -16,6 +16,7 @@ export default function Home() {
             <div>
                 ↓ urlのみ
                 <ReactPlayerYoutube2 url={videoId} /><br />
+
                 ↓ urlに時間指定付与
                 <ReactPlayerYoutube2 url={url} /><br />
 

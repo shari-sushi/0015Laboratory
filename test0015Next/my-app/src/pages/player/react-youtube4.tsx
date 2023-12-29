@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState, createContext } from "react"
 import Link from "next/link"
 
-
 // 仮説
 // ~Mountとかで先に渡した値をonReadyに渡し直してるから動かない
 

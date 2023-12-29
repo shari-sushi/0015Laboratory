@@ -60,7 +60,7 @@ const Player = ({ url, start }: Player) => {
                     playing
                     controls
                     config={{ playerVars: { start: onStartStart } }} // start= 120
-                    onStart={() => setOnStartStart(start)}
+                    // onStart={() => setOnStartStart(start)}
                     onReady={() => setOnStartStart(start)}
                 />
             }

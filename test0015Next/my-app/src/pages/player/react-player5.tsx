@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <>
             <Link href="/">Home</Link>
-            <h1>react-player/youtube 4</h1>
+            <h1>react-player/youtube 5</h1>
             <div className="App">
                 <Player start={start} url={url} />
                 <p>{start} seconds</p>
@@ -42,12 +42,27 @@ const Player = ({ url, start }: Player) => {
         }
     }, []);
 
-    onYouTubeIframeAPIReady();
-    const onReady = () => {
-        player.seekTo(start)
-    }
+    // const useYoutube = (callback: any) => {
+    //     useEffect(() => {
+    //         if (!window.YT) {
+    //             var tag = document.createElement('script');
+    //             tag.src = 'https://www.youtube.com/iframe_api';
+    //             var firstScriptTag = document.getElementsByTagName('script')[0];
+    //             firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    //             tag.onload = callback;
+    //         } else {
+    //             callback();
+    //         }
+    //     }, []);
+    // };
+    // useYoutube()
 
-    const [onStartStart, setOnStartStart] = useState(0)
+    // onYouTubeIframeAPIReady();
+    // const onReady = () => {
+    //     player.seekTo(start)
+    // }
+
+    const [onStartStart, setOnStartStart] = useState(120)
     // const config = {
     //     playerVars: {
     //         start, // ダメ
@@ -56,6 +71,7 @@ const Player = ({ url, start }: Player) => {
     //         // origin: url
     //     }
     // };
+
     return (
         <>
             {hasWindow &&
@@ -64,8 +80,10 @@ const Player = ({ url, start }: Player) => {
                     playing
                     controls
                     config={{ playerVars: { start: onStartStart } }} // start= 120
-                    onStart={onReady}
-                    onReady={onReady}
+                    onStart={() => setOnStartStart(start)}
+                    onReady={() => setOnStartStart(start)}
+                // onStart={onReady}
+                // onReady={onReady}
                 />
             }
         </>
@@ -82,18 +100,38 @@ const Player = ({ url, start }: Player) => {
     );
 };
 /////////////////////////////////////////////////////////////////////////
-var player: any;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        height: '360',
-        width: '640',
+// var player: any;
+// function onYouTubeIframeAPIReady() {
+//     player = new YT.Player('player', {
+//         height: '360',
+//         width: '640',
+//         events: {
+//             'onReady': onPlayerReady,
+//             'onStateChange': onPlayerStateChange,
+//         }
+//     });
+// }
 
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChang
-        }
-    });
-}
+// function onPlayerReady(event: any) {
+//     event.target.playVideo();
+// }
+// var done = false;
+// function onPlayerStateChange(event: any) {
+//     if (event.data == YT.PlayerState.PLAYING && !done) {
+//         // if (event.data === window.YT.PlayerState.PLAYING && !done) {
+//         setTimeout(stopVideo, 6000);
+//         done = true;
+//     }
+// }
+// function stopVideo() {
+//     player.stopVideo();
+// }
+
+// interface MyWindow extends Window {
+//     onYouTubeIframeAPIReady(): void;
+// }
+// declare var window: MyWindow;
+
 /////////////////////////////////////////////////////////////////////////
 
 

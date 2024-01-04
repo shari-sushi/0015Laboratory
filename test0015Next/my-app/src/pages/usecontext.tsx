@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, createContext } from "react"
 import Link from "next/link"
 import { TestuseContect } from "@/component/useContextCom.tsx"
 
-// 参考（React公式）
+// 参考（React公式の和訳）
 // https://ja.react.dev/reference/react/useContext#updating-data-passed-via-context
 
 const value = {

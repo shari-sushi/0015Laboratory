@@ -43,7 +43,6 @@ export const Child: React.FC = () => {
     )
 }
 
-
 const GrandChild: React.FC = () => {
     // 親要素で指定した変数を受け取る
     const { count, setCount } = useContext(CountContext)
@@ -51,8 +50,10 @@ const GrandChild: React.FC = () => {
 
     // セットで受け取りたい 
     const { pairName, setPairName } = useContext(PairContext)
-    const { pairCount, setPairCount } = useContext(PairContext)
+    const { pairCount } = useContext(PairContext)
+    const { setPairCount } = useContext(PairContext)
     // ↑好きな分け方で受け取れる↓
+    // const { pairCount, setPairCount } = useContext(PairContext)
     // const { pairName, setPairName, pairCount, setPairCount } = useContext(PairContext)
 
     return (

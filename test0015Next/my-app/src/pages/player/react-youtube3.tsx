@@ -50,7 +50,8 @@ export default function Home() {
             <br /><br />
             ボタンじゃなくてリンクが良い <br />
             <Link href="#" onClick={() => settinghandler("wBjhxyFU3EY", 30)}>wBjhxyFU3EYの30秒にセット</Link><br />
-            <button onClick={() => handlerDelayBySetTimeOuT("wBjhxyFU3EY", 30)}>1800ms遅延</button><br />
+            <button onClick={() => handlerDelayBySetTimeOuT("wBjhxyFU3EY", 30)}>1200ms遅延</button><br />
+
             requestAnimationFrameはエラーの原因になるっぽい。まあ、描画じゃなくてonReadyでやれって話よな… <br />
             {/* <button onClick={() => handlerDelayFrame("wBjhxyFU3EY", 30)}>描画完了まで遅延させてみる</button> */}
             <br />

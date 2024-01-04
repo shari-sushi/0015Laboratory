@@ -21,6 +21,11 @@ export default function Home() {
             <Link href="/player/react-player">react-player</Link>：時間指定意味無し<br />
             <Link href="/player/react-player2">react-player2</Link><br />
             <Link href="/player/react-player3">react-player3</Link><br />
+
+            <li>convert</li>
+            秒とhh:mm:ssの変換 <br />
+            <Link href="/convert/time1">time1</Link><br />
+
         </>
     )
 }

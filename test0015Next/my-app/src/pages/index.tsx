@@ -1,69 +1,31 @@
-import { useEffect, useState } from "react"
-import { useRouter } from "next/router";
-import Link from 'next/link';
-import https from 'https';
+import React, { useContext, useEffect, useState, createContext } from "react"
+import Link from "next/link"
 
-export default function Home({ data2, data3 }: any) {
-  console.log("data2", data2)
-  console.log("data3", data3)
-  // {"Movie": {"Id": 1, "MovieTitle": "imo"}, "LikeCnt": 10}
-  return (
-    <main>
-      <div>
-        data2: <br />
-        message:  <pre>{JSON.stringify(data2.message[0], null, 2)}</pre>
-        出力方法<br />
-        {"   {item.Movie.MovieId}"}<br />
-        {"    {item.Movie.MovieTitle}"} <br />
-        {"    {item.LikeCnt}"}<br />
+export default function Home() {
 
-        結果
-        {data2.message.map((item: any) => (
-          <div key={item.Id}>
-            <li>
-              {item.Movie.MovieId}
-              {item.Movie.MovieTitle} {/*ネストした分だけ.を増やせば解決 */}
-              {item.LikeCnt}
-            </li>
-          </div>
-        ))}
-      </div><br /><br />
-      <div>
-        data3:    <br />      message:<pre>{JSON.stringify(data3.message[0], null, 2)}</pre>
-        出力方法<br />
-        {" {item.MovieId}"}<br />
-        {"  {item.MovieTitle}"}<br />
-        {"   {item.LikeCnt}"}<br />
-        出力結果<br />
-        {data3.message.map((item: any) => (
-          <div key={item.Id}>
-            <li>
-              {item.MovieId}
-              {item.MovieTitle} {/*ネストした分だけ.を増やせば解決 */}
-              {item.LikeCnt}
-            </li>
-          </div>
-        ))}
-      </div>
-    </main >
-  )
-}
-// // 10
-// 0
-// 100
-export async function getServerSideProps() {
-  // const res1 = await fetch(`http://localhost:8080/1`);
-  const res2 = await fetch(`http://localhost:8080/2`);
-  const res3 = await fetch(`http://localhost:8080/3`);
+    return (
+        <>
+            <h1>home</h1>
+            <br />
+            <Link href="/usecontext">useContext</Link><br />
+            <br />
+            <Link href="/tutorial/react-table">tanstacl table チュート</Link><br />
 
-  console.log("res21\n", res2, "res3\n", res3)
-  // const data1 = await res1.json()
-  const data2 = await res2.json()
-  const data3 = await res3.json()
-  console.log("data2\n", data2)
-  console.log("data3\n", data3)
-  return {
-    // props1: data1,
-    props: { data2: data2, data3: data3 }
-  }
+            <li>player</li>
+            <Link href="/player/react-youtube">react-youtube</Link>：時間指定意味無し<br />
+            <Link href="/player/react-youtube2">react-youtube2</Link>:再生できなかった<br />
+            <Link href="/player/react-youtube3">react-youtube3</Link>：時間指定意味無し時間指定では２回操作が必要<br />
+            <Link href="/player/react-youtube4">react-youtube4</Link>:<br />
+            <Link href="/player/react-youtube5">react-youtube5</Link>:<br />
+            <Link href="/player/react-youtube5">react-youtube6</Link>:<br />
+            <Link href="/player/react-player">react-player</Link>：時間指定意味無し<br />
+            <Link href="/player/react-player2">react-player2</Link><br />
+            <Link href="/player/react-player3">react-player3</Link><br />
+
+            <li>convert</li>
+            秒とhh:mm:ssの変換 <br />
+            <Link href="/convert/time1">time1</Link><br />
+
+        </>
+    )
 }

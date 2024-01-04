@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func main() {
+func AleterMainPointer() {
 	fmt.Print("------------\n")
 
 	var user User

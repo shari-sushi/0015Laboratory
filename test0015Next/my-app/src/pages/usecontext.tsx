@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState, createContext } from "react"
 import Link from "next/link"
-import { TestuseContect } from "@/component/useContextCom.tsx"
+import { TestuseContect } from "@/component/useContextCom/Child"
 
+// 例１
 // 参考（React公式の和訳）
 // https://ja.react.dev/reference/react/useContext#updating-data-passed-via-context
 
@@ -26,18 +27,21 @@ export default function TestuseContext() {
                 <ValueContext.Provider value={value}>
                     <br />
                     <br />
+                    例１:定数を渡すだけ<br />
                     <TestuseContect />
                 </ValueContext.Provider>
             </StateContext.Provider>
             <br />-------------<br />
+            例２: set関数を渡して、子から親を操作する <br />
             <Parent />
         </>
     )
 }
 //////////////////////////////////
+// 例２
 // 参考　別ファイルの子、孫から親のstateを操作する
 // https://qiita.com/Rascal823/items/0f53ffbb410505b707f8
-import { Child } from "@/component/useContextCom.tsx"
+import { Child } from "@/component/useContextCom/Child"
 export const CountContext = React.createContext({} as {
     count: number
     setCount: React.Dispatch<React.SetStateAction<number>>

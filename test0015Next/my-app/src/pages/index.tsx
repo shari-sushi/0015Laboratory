@@ -26,6 +26,14 @@ export default function Home() {
             秒とhh:mm:ssの変換 <br />
             <Link href="/convert/time1">time1</Link><br />
 
+            <br />
+
+            <h1 className="text-3xl font-bold underline">
+                h1タグ: You can use Tailwind
+            </h1>
+            <a className="text-3xl  underline">
+                aタグ: You can use Tailwind
+            </a>
         </>
     )
 }

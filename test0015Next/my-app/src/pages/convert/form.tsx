@@ -19,7 +19,7 @@ export default function Demo() {
     let texts = [""]
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         setSingStartInput(data.singStart);
-        texts = texts.push(singStart)
+        // texts = texts.push(singStart)
     };
 
     return (

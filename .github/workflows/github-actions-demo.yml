@@ -24,7 +24,10 @@ jobs:
     # -v : パッケージ名を出力
     - name: Build
       run: go build -v ./...
+      working-directory: test0015Go/.
 
     # -v : テスト成功しても値を出力
     - name: Test
       run: go test -v ./...
+      working-directory: test0015Go/.
+

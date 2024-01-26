@@ -8,12 +8,11 @@ type Listener struct {
 }
 
 // VMK
-type VtuberId int
 type Movie struct {
-	MovieUrl        string      `gorm:"primaryKey;type:varchar(100)"` //`json:"movie_url"`
-	MovieTitle      *string     `gorm:"type:varchar(200);not null"`   //`json:"movie_title"`
-	VtuberId        *VtuberId   `gorm:"type:int(11);not null"`        //`json:"vtuber_id"`
-	MovieInputterId *ListenerId `gorm:"type:int(11);not null"`        //`json:"movie_inputter_id"` /new
+	MovieUrl        string     `gorm:"primaryKey;type:varchar(100)"` //`json:"movie_url"`
+	MovieTitle      string     `gorm:"type:varchar(200);not null"`   //`json:"movie_title"`
+	VtuberId        VtuberId   `gorm:"type:int(11);not null"`        //`json:"vtuber_id"`
+	MovieInputterId ListenerId `gorm:"type:int(11);not null"`        //`json:"movie_inputter_id"` /new
 }
 
 // like_reration
@@ -36,24 +35,40 @@ type FavoriteCountForContent struct {
 	Count int `gorm:"type:int(11);default:0"`
 }
 
-// Email        string         `gorm:"type:varchar(255);unique;not null"`
-// Password     string         `gorm:"type:varchar(100);not null"`
-// CreatedAt    time.Time      `gorm:"type:datetime;default:current_timestamp"`
-// UpdatedAt    sql.NullTime   `gorm:"type:datetime"`
-// DeletedAt    gorm.DeletedAt `gorm:"type:datetime;index:deleted_index"`
+type VtuberId int
+type Vtuber struct {
+	VtuberId         VtuberId   `gorm:"primaryKey;type:int(11)"`          //`json:"vtuber_id"`
+	VtuberName       string     `gorm:"type:varchar(50);not null;unique"` //`json:"vtuver_name"`
+	VtuberKana       string     `gorm:"type:varchar(50);unique"`          //`json:"vtuber_kana"`
+	IntroMovieUrl    string     `gorm:"type:varchar(100)"`                //`json:"vtuber_intro_movie_url"`
+	VtuberInputterId ListenerId `gorm:"type:int(11);not null"`            //`json:"vtuber_inputter_id"`
+}
 
-// type KaraokeListId int
-// type KaraokeList struct {
-// 	MovieUrl              string        `gorm:"primaryKey;type:varchar(100)"` //`json:"movie_url"`
-// 	KaraokeListId         KaraokeListId `gorm:"primaryKey;type:int(11)"`      //`json:"id"`
-// 	SingStart             *string       `gorm:"type:time(0)"`                 //`json:"sing_start"`
-// 	SongName              string        `gorm:"type:varchar(100)"`            //`json:"song_name"`
-// 	KaraokeListInputterId *ListenerId   `gorm:"type:int(11)"`                 //`json:"inputter_id"`
-// }
+type TransmitMovie struct {
+	VtuberId
+	MovieUrl string
+	Vtuber
+	Movie
+	Count int
+	IsFav bool
+}
 
-// type Follow struct {
-// 	Id               int `gorm:"primaryKey;type:int(11)"`
-// 	FollowListener   int `gorm:"not null;type:int(11);uniqueIndex:follow_followed;not null"`
-// 	FollowedVtuber   int `gorm:"type:int(11);uniqueIndex:follow_followed"`
-// 	FollowedListener int `gorm:"type:int(11);uniqueIndex:follow_followed"`
-// }
+type KaraokeId int
+type Karaoke struct {
+	KaraokeId         KaraokeId  `gorm:"primaryKey;type:int(11);"`                          //`json:"id"`
+	MovieUrl          string     `gorm:"type:varchar(100);uniqueIndex:karaoke_uq:not null"` //`json:"movie_url"`
+	SingStart         string     `gorm:"type:time(0);uniqueIndex:karaoke_uq"`               //`json:"sing_start"`
+	SongName          string     `gorm:"type:varchar(100)"`                                 //`json:"song_name"`
+	KaraokeInputterId ListenerId `gorm:"type:int(11)"`                                      //`json:"inputter_id"`
+}
+
+type TransmitKaraoke struct {
+	VtuberId
+	Vtuber
+	MovieUrl string
+	Movie
+	KaraokeId
+	Karaoke
+	Count int
+	IsFav bool
+}

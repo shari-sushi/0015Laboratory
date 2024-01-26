@@ -8,6 +8,6 @@ COPY go.mod go.sum ./
 
 RUN go mod download
 
-COPY cmd domain infra interfaces useCase .env ./
+COPY cmd domain infra interfaces useCase sample .env ./
 
 CMD [ "go","run","cmd/main.go" ]

@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.18
+FROM golang:1.18-alpine
 
 WORKDIR /api/src
 
-COPY go.mod go.sum ./
+COPY . .
 
-RUN go mod download
+RUN go get -u all
 
-COPY cmd domain infra interfaces useCase sample .env ./
+EXPOSE 8080
 
 CMD [ "go","run","cmd/main.go" ]

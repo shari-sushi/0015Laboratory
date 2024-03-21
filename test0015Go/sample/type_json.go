@@ -147,7 +147,7 @@ func init() {
 
 // CREATE DATABASE test;
 // GRANT ARLL ON *.* TO 'user' WITH GRANT OPTIOM;
-func init() {
+func initaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa() {
 	user := os.Getenv("MYSQL_USER")
 	pw := os.Getenv("MYSQL_PASSWORD")
 	// db_name := os.Getenv("MYSQL_DATABASE")
@@ -160,10 +160,10 @@ func init() {
 	db, err = gorm.Open(mysql.Open(path), &gorm.Config{})
 	db = db.Debug()
 	if err != nil {
-		panic("failed to connect database")
+		// 	panic("failed to connect database")
 	}
 
-	migration()
+	// migration()
 	requestLogger()
 
 	// preparedata() // 取得する用のデータ準備　初回のみ実施する

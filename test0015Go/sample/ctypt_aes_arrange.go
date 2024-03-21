@@ -6,6 +6,9 @@ import (
 	"crypto/cipher"
 	"encoding/hex"
 	"fmt"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 // test0015Go\sample\ctypt_aes_qiita.goの内容を
@@ -16,14 +19,19 @@ var aesKey []byte
 var aesIv []byte
 
 func init() {
-	aesKey = []byte("645E739A7F9F162725C1533DC2C5E827")             // ポートフォリオでは.envから取得
-	aesIv, _ = hex.DecodeString("a541fef20f750b79eb6dff9bbb823367") // 同上
+	// aesKey = []byte("645E739A7F9F162725C1533DC2C5E827")             // 公開するサービスでは.envから取得
+	// aesIv, _ = hex.DecodeString("a541fef20f750b79eb6dff9bbb823367") // 同上
+	_ = godotenv.Load("../.env")
+	aesKey = []byte(os.Getenv("AES_KEY"))
+	aesIv, _ = hex.DecodeString(os.Getenv("AES_IV"))
+
 	// fmt.Printf("aesKey = %v, \naesIv =%v \n", aesKey, aesIv)
 }
 
 /////////////// 呼び出し場所想定////////////s///////////////////
 func AlterMainCrypt() {
-	plain := "shari@gmail.com" //平文：ユーザーに入力してもらう
+	plain := "susi.imo.niku@gmail.com" //平文：ユーザーに入力してもらう
+	fmt.Printf("plain:%v\n", plain)
 	var errs []error
 
 	// AES化、ただしviを固定している(AESとは言えないかもしれない)
@@ -47,16 +55,17 @@ func AlterMainCrypt() {
 
 func EncryptByAES(plain string) (encrypted string, err error) {
 	bytePlain := []byte(plain)
+	fmt.Printf("bytePlain:%v\n", bytePlain)
 
 	block, err := aes.NewCipher(aesKey)
 	if err != nil {
-		return "", err
+		return "err of encrypt to aes:", err
 	}
 	padded := pkcs7Pad(bytePlain)
-	byteEncrypted := make([]byte, len(padded))
-	fmt.Printf("byteEncrypted= %v\n", byteEncrypted)
-	cbcEncrypter := cipher.NewCBCEncrypter(block, aesIv)
+	byteEncrypted := make([]byte, len(padded)) //初期化みたいなもの
 	// fmt.Printf("byteEncrypted= %v\n", byteEncrypted) //[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+
+	cbcEncrypter := cipher.NewCBCEncrypter(block, aesIv)
 	cbcEncrypter.CryptBlocks(byteEncrypted, padded)
 	// fmt.Printf("byteEncrypted= %v\n", byteEncrypted)        // [147 97 197 223 25 106 174 242 251 98 27 102 193 134 87 183]
 	convertedHexString := hex.EncodeToString(byteEncrypted) // 9361c5df196aaef2fb621b66c18657b7

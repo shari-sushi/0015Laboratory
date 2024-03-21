@@ -6,6 +6,7 @@ export default function Home() {
     return (
         <>
             <h1>home</h1>
+            <Link href="/file">file</Link><br />
             <br />
             <Link href="/usecontext">useContext</Link><br />
             <br />
@@ -28,12 +29,19 @@ export default function Home() {
 
             <br />
 
-            <h1 className="text-3xl font-bold underline">
+            <h1 className=" font-bold underline">
                 h1タグ: You can use Tailwind
             </h1>
-            <a className="text-3xl  underline">
+            <a className="  underline">
                 aタグ: You can use Tailwind
             </a>
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <h1 className=" font-bold underline">Sanstack Table (React-Table)</h1><br />
+            <li><Link href="/react-table/filter">filter</Link></li>
         </>
     )
 }

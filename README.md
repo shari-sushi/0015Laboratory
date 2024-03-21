@@ -5,4 +5,12 @@
 - youtube-player, react-youtube
 - css
 - Next.jsテストコード
-
+- goでアルゴリズム
+ - LinearSerch
+ - BinarySerach
+ - BubbleSort
+ - SelectionSort
+ - LisertionSort
+ - ShellSort
+ - QuickSort
+ - MergeSort

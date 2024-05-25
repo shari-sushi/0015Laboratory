@@ -6,17 +6,24 @@ import (
 	"github.com/sharin-sushi/0015docker/sample"
 	"github.com/sharin-sushi/0015docker/sample/dbnilpo"
 	"github.com/sharin-sushi/0015docker/sample/nodbapi"
+	"github.com/sharin-sushi/0015docker/sample/sort"
 )
 
 // "github.com/sharin-sushi/0015docker/sample" // 消えないようにメモ
 
 func main() {
-	// main1()
-	// main2()
-	main3()
+	// callDBnilpo()
+	// callEncrypt()
+	// callEncrypt()
+	// callVKara()
+	callSort()
 }
 
-func main1() {
+func callSort() {
+	sort.CallForMain()
+}
+
+func callVKara() {
 	// pointer.go
 	// for x, y := range のテスト
 	r := gin.Default()
@@ -55,7 +62,7 @@ func main1() {
 
 }
 
-func main2() {
+func callEncrypt() {
 	// crypt.go AES化
 	// sample.AlterMainCrypt2() //元記事ほぼそのままのもの
 	sample.AlterMainCrypt() //自分用に改変したもの
@@ -65,7 +72,7 @@ func main2() {
 	// sample.AleterMainPointer()
 }
 
-func main3() {
+func callDBnilpo() {
 	dbnilpo.Main()
 
 }

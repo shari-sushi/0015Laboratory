@@ -36,12 +36,10 @@ export default function Home() {
                 aタグ: You can use Tailwind
             </a>
             <br />
-            <br />
-            <br />
-            <br />
 
             <h1 className=" font-bold underline">Sanstack Table (React-Table)</h1><br />
             <li><Link href="/react-table/filter">filter</Link></li>
+            <li><Link href="/tanstacktable">tanstacktable</Link></li>
         </>
     )
 }

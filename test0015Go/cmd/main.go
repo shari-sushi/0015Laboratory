@@ -16,7 +16,7 @@ func main() {
 	// callEncrypt()
 	// callEncrypt()
 	// callVKara()
-	callSort()
+	// callSort()
 }
 
 func callSort() {

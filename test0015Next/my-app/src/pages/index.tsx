@@ -40,6 +40,7 @@ export default function Home() {
             <h1 className=" font-bold underline">Sanstack Table (React-Table)</h1><br />
             <li><Link href="/react-table/filter">filter</Link></li>
             <li><Link href="/tanstacktable">tanstacktable</Link></li>
+            <li><Link href="/enum">TS の enum</Link></li>
         </>
     )
 }

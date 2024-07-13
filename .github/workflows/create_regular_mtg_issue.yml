@@ -1,0 +1,37 @@
+name: create issue
+on:
+  schedule:
+    # https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
+    # - cron: '0 9 * * 1'  # At 18:00 on Monday(JST).
+    - cron: '20 17 * * 6'  # At 2:20 on sun(JST). // 最初の動作確認用
+    - cron: '0 1 * * 0'  # At 10:00 on sun(JST).
+    - cron: '0 10 * * *'  # At 19:00 on everyday(JST).
+  
+jobs:
+  create_regular_mtg_issue:
+    name: create regular MTG issue
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Get date time in JST
+        id: date
+        run: |
+          echo "::set-output name=now::$(date "+%m/%d")"
+      - name: Create an issue
+        uses: actions-ecosystem/action-create-issue@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          title: '【${{ steps.date.outputs.now }} (火)】定例'
+          body: |
+            自動生成された定例MTGのissueです。
+          labels: |
+              documentation
+        # ↓みたいな方法もあるぽい
+        # env:
+          # GITHUB_TOKEN: $ {{ secrets.GITHUB_TOKEN }}
+          
+
+# 全体の参考
+# https://qiita.com/mziyut/items/34435e9cb3fd76e7e86f
+#   - .mdのテンプレは使って無いね
+         

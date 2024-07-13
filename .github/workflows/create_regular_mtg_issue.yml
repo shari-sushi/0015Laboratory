@@ -3,13 +3,13 @@ on:
   schedule:
     # https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
     # - cron: '20 17 * * 6'  # At 2:20 on sun(JST). // actions起動はした。7分くらい遅れ
-    - cron: '55 17 * * 6'  # At 2:20 on sun(JST). // actions起動はした。20分くらい遅れ
+    # - cron: '55 17 * * 6'  # At 2:20 on sun(JST). // actions起動はした。20分くらい遅れ
     - cron: '20 18 * * 6'  # At 3:20 on sun(JST). // 最初の動作確認用
     - cron: '25 18 * * 6'  # At 3:25 on sun(JST). // 最初の動作確認用
     - cron: '30 18 * * 6'  # At 3:25 on sun(JST). // 最初の動作確認用
     - cron: '0 1 * * 0'  # At 10:00 on sun(JST).
     - cron: '0 10 * * *'  # At 19:00 on everyday(JST).
-  
+
 jobs:
   create_regular_mtg_issue:
     name: create regular MTG issue

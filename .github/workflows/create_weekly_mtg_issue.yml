@@ -1,0 +1,29 @@
+name: Weekly MTG
+on:
+  schedule:
+    - cron: 25 19 * * 1 # at 4:25 Mon(JST)
+    - cron: 30 19 * * 1 # at 4:30 Mon(JST)
+
+jobs:
+  create_issue:
+    name: Create team sync issue
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Create team sync issue
+        run: |
+          new_issue_url=$(gh issue create \
+            --title "$TITLE" \
+            --label "$LABELS" \
+            --body "$BODY")
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TITLE: 【(○曜日)】MTG 
+          LABELS: documentation
+          BODY: |
+            自動生成issueです
+
+# GitHub 公式より
+# https://docs.github.com/en/actions/managing-issues-and-pull-requests/scheduling-issue-creation   

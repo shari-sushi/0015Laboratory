@@ -1,8 +1,8 @@
 name: Weekly MTG
 on:
   schedule:
-    - cron: 25 19 * * 1 # at 4:25 Mon(JST)
-    - cron: 30 19 * * 1 # at 4:30 Mon(JST)
+    - cron: 40 19 * * 0 # at 4:40 Mon(JST)
+    - cron: 45 19 * * 0 # at 4:45 Mon(JST)
 
 jobs:
   create_issue:
@@ -17,6 +17,9 @@ jobs:
             --title "$TITLE" \
             --label "$LABELS" \
             --body "$BODY")
+          if [[ $PINNED == true ]]; then
+            gh issue pin "$new_issue_url"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -24,6 +27,7 @@ jobs:
           LABELS: documentation
           BODY: |
             自動生成issueです
+          PINNED: true
 
 # GitHub 公式より
 # https://docs.github.com/en/actions/managing-issues-and-pull-requests/scheduling-issue-creation   

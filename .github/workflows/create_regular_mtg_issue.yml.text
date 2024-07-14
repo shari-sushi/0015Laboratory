@@ -1,0 +1,48 @@
+# name: create issue
+# on:
+#   schedule:
+#     # https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
+#     # - cron: '20 17 * * 6'  # At 2:20 on sun(JST). // actions起動はした。7分くらい遅れ
+#     # - cron: '55 17 * * 6'  # At 2:20 on sun(JST). // actions起動はした。20分くらい遅れ
+#     - cron: '15 18 * * 0'  # At 18:15 on mon(JST). // 問題切り分け。変数無しのissue作成のみできるか
+#     - cron: '20 12 * * 0'  # At 18:20 on mon(JST). // 最初の動作確認用
+#     - cron: '0 1 * * 0'  # At 10:00 on sun(JST). 
+#     - cron: '0 10 * * *'  # At 19:00 on everyday(JST).
+
+# jobs:
+#   create_regular_mtg_issue:
+#     name: create regular MTG issue
+#     runs-on: ubuntu-latest
+#     permissions:
+#       issues: write
+#     timeout-minutes: 10
+#     steps:
+#       # - name: Get date time in JST
+#         # id: date
+#         # run : |
+#         #   echo "NOW=$(TZ='Asia/Tokyo' date +'%Y-%m-%d')" >> $GITHUB_ENV 
+#       - name: Create an issue
+#         uses: actions-ecosystem/action-create-issue@v1
+#         with:
+#           github_token: $ {{ secrets.GITHUB_TOKEN }}
+
+#           title: '【(火)】定例'
+#           body: |
+#             自動生成された定期MTG用のissueです。
+#           labels: |
+#               documentation
+#         # ↓みたいな方法もあるぽい
+#         # env:
+#           # GITHUB_TOKEN: $ {{ secrets.GITHUB_TOKEN }}
+#           # github_token: $ {{ secrets.github_token }}
+#           # title: '【$ {{ steps.date.outputs.now }} (火)】定例'
+
+# # 全体の参考
+# # https://qiita.com/mziyut/items/34435e9cb3fd76e7e86f
+# #   - .mdのテンプレは使って無いね
+# #  set-outputは非推奨どころか削除予定って2022年に告知されてるのに
+# # The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files.
+#   # https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+#   # run: |
+#     # echo "::set-output name=now::$(date "+%m/%d")"
+         

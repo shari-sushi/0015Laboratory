@@ -1,8 +1,8 @@
 name: Weekly MTG
 on:
   schedule:
-    - cron: 40 20 * * 0 # at 4:45 Mon(JST)
-    - cron: 45 20 * * 0 # at 4:50 Mon(JST)
+    - cron: 55 20 * * 0 # at 4:45 Mon(JST)
+    - cron: 00 21 * * 0 # at 4:50 Mon(JST)
     - cron: 00 09 * * 2 # at 18:00 Tue(JST)
 
 jobs:
@@ -13,9 +13,9 @@ jobs:
       issues: write
     steps:
       - name: Get the current date
-        run: echo "NOW=`(TZ='Asia/Tokyo' date +'%m/%d(%a)')`" >> $GITHUB_ENV
-      - name: echo $NOW
-        run: echo $NOW
+        run: echo "NOW=`(TZ='Asia/Tokyo' date +'%m/%d %a')`" >> $GITHUB_ENV
+      - name: echo NOW
+        run: echo NOW
       - name: Create issue
         run: |
           new_issue_url=$(gh issue create \
@@ -29,7 +29,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           NOW: (TZ='Asia/Tokyo' date +'%m/%d(%a)') 
-          TITLE_: 【 ${{ env.NOW }}(火曜日)】MTG 
+          TITLE_: 【${{ env.NOW }}】MTG 
           LABELS: documentation
           BODY: |
             自動生成issueです

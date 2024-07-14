@@ -1,9 +1,9 @@
 name: Weekly MTG
 on:
   schedule:
-    - cron: 15 21 * * 0 # at 6:15 Mon(JST)
-    - cron: 20 21 * * 0 # at 6:20 Mon(JST)
-    - cron: 20 00 * * 1 # at 9:20 Mon(JST) // 0時を2桁でもできることの確認
+    - cron: 30 21 * * 0 # at 6:30 Mon(JST)
+    - cron: 35 21 * * 0 # at 6:35 Mon(JST)
+    - cron: 00 00 * * 1 # at 9:00 Mon(JST) // 0時, 00分を2桁でもできることの確認
     - cron: 00 09 * * 2 # at 18:00 Tue(JST)
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           NOW: (TZ='Asia/Tokyo' date +'%m/%d(%a)') 
-          TITLE_: 【${{ env.NOW }}】MTG 
+          TITLE: 【${{ env.NOW }}】MTG 
           LABELS: documentation
           BODY: |
             自動生成issueです

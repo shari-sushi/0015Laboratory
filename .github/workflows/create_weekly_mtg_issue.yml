@@ -1,8 +1,9 @@
 name: Weekly MTG
 on:
   schedule:
-    - cron: 55 20 * * 0 # at 4:45 Mon(JST)
-    - cron: 00 21 * * 0 # at 4:50 Mon(JST)
+    - cron: 15 21 * * 0 # at 6:15 Mon(JST)
+    - cron: 20 21 * * 0 # at 6:20 Mon(JST)
+    - cron: 20 00 * * 1 # at 9:20 Mon(JST) // 0時を2桁でもできることの確認
     - cron: 00 09 * * 2 # at 18:00 Tue(JST)
 
 jobs:
@@ -13,7 +14,7 @@ jobs:
       issues: write
     steps:
       - name: Get the current date
-        run: echo "NOW=`(TZ='Asia/Tokyo' date +'%m/%d %a')`" >> $GITHUB_ENV
+        run: echo "NOW=`(TZ='Asia/Tokyo' date +'%m/%d.%a')`" >> $GITHUB_ENV
       - name: echo NOW
         run: echo NOW
       - name: Create issue

@@ -1,10 +1,9 @@
 name: Weekly MTG
 on:
   schedule:
-    - cron: 30 21 * * 0 # at 6:30 Mon(JST)
-    - cron: 35 21 * * 0 # at 6:35 Mon(JST)
-    - cron: 00 00 * * 1 # at 9:00 Mon(JST) // 0時, 00分を2桁でもできることの確認
-    - cron: 00 09 * * 2 # at 18:00 Tue(JST)
+    # - cron: 30 21 * * 0 # at 6:30 Mon(JST) // 約8分遅延で成功
+    - cron: 00 00 15 07 1 # at 9:00 Mon(JST) // 0時, 00分を2桁でもできることの確認
+    - cron: 00 09 16 07 2 # at 18:00 Tue(JST) // ポジコンもどきとして設定。実際にやりたいrepositoryで同時間に設定。
 
 jobs:
   create_issue:

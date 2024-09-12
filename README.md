@@ -16,3 +16,5 @@
   - MergeSort
 - React-hooks
   - [useContext](https://github.com/shari-sushi/0015Laboratory/tree/main/test0015Next/my-app/src/component) 
+- init関数の動作確認
+  - test時にも動くか([別リポジトリ](https://github.com/shari-sushi/sanbox))
